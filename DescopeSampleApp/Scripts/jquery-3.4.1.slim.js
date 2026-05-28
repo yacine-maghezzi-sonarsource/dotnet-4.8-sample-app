@@ -707,6 +707,7 @@ try {
 	// Detect silently failing push.apply
 	arr[ preferredDoc.childNodes.length ].nodeType;
 } catch ( e ) {
+	console.debug( "push.apply failed, using fallback: " + e );
 	push = { apply: arr.length ?
 
 		// Leverage slice if possible
@@ -849,6 +850,7 @@ function Sizzle( selector, context, results, seed ) {
 					return results;
 				} catch ( qsaError ) {
 					nonnativeSelectorCache( selector, true );
+					console.debug( "querySelectorAll failed for selector: " + selector, qsaError );
 				} finally {
 					if ( nid === expando ) {
 						context.removeAttribute( "id" );
@@ -901,6 +903,7 @@ function assert( fn ) {
 	try {
 		return !!fn( el );
 	} catch (e) {
+		console.log("Exception in assert: " + e);
 		return false;
 	} finally {
 		// Remove from its parent by default
@@ -1517,6 +1520,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 			}
 		} catch (e) {
 			nonnativeSelectorCache( expr, true );
+			console.debug( "matchesSelector failed for expr: " + expr, e );
 		}
 	}
 
@@ -4929,7 +4933,10 @@ function expectSync( elem, type ) {
 function safeActiveElement() {
 	try {
 		return document.activeElement;
-	} catch ( err ) { }
+	} catch ( err ) {
+		console.log( "safeActiveElement error: " + err );
+		return document.body;
+	}
 }
 
 function on( elem, types, selector, data, fn, one ) {
