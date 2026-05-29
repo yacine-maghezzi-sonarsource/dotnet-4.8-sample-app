@@ -574,7 +574,8 @@ function hydrateObj(obj, meta) {
   for (const [key, value] of Object.entries(meta || {})) {
     try {
       obj[key] = value;
-    } catch (_unused) {
+    } catch (err) {
+      console.debug(`Direct property assignment failed for key "${key}", falling back to defineProperty: ${err}`);
       Object.defineProperty(obj, key, {
         configurable: true,
 
@@ -671,6 +672,7 @@ function normalizeData(value) {
   try {
     return JSON.parse(decodeURIComponent(value));
   } catch (_unused) {
+    console.log(`Failed to parse value: ${_unused}`);
     return value;
   }
 }

@@ -1055,6 +1055,7 @@ window.Modernizr = (function( window, document, undefined ) {
             }());
           } catch(e) {
             // assign a false positive if detection fails => unable to shiv
+            console.log('html5shiv: exception during feature detection: ' + e);
             supportsHtml5Styles = true;
             supportsUnknownElements = true;
           }
