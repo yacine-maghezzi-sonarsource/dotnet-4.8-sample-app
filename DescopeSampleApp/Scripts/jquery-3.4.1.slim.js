@@ -4230,7 +4230,9 @@ function dataAttr( elem, key, data ) {
 		if ( typeof data === "string" ) {
 			try {
 				data = getData( data );
-			} catch ( e ) {}
+			} catch ( e ) {
+				console.debug( "dataAttr getData parse error: " + e );
+			}
 
 			// Make sure we set the data so it isn't changed later
 			dataUser.set( elem, key, data );
@@ -6168,7 +6170,9 @@ jQuery.fn.extend( {
 					elem = 0;
 
 				// If using innerHTML throws an exception, use the fallback method
-				} catch ( e ) {}
+				} catch ( e ) {
+					window.console?.debug( "jQuery.fn.html innerHTML failed: " + e );
+				}
 			}
 
 			if ( elem ) {
