@@ -740,7 +740,7 @@ window.Modernizr = (function( window, document, undefined ) {
                 bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,'');
             }
 
-        } catch(e) { }
+        } catch(e) { console.log(e); }
 
         return bool;
     };
@@ -762,7 +762,7 @@ window.Modernizr = (function( window, document, undefined ) {
                 bool.m4a  = ( elem.canPlayType('audio/x-m4a;')            ||
                               elem.canPlayType('audio/aac;'))             .replace(/^no$/,'');
             }
-        } catch(e) { }
+        } catch(e) { console.log(e); }
 
         return bool;
     };
@@ -791,6 +791,7 @@ window.Modernizr = (function( window, document, undefined ) {
             localStorage.removeItem(mod);
             return true;
         } catch(e) {
+            console.log(e);
             return false;
         }
     };
@@ -801,6 +802,7 @@ window.Modernizr = (function( window, document, undefined ) {
             sessionStorage.removeItem(mod);
             return true;
         } catch(e) {
+            console.log(e);
             return false;
         }
     };
